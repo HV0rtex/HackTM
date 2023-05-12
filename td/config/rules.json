@@ -10,7 +10,8 @@
     "ENEMY": {
         "HEALTH": 100,
         "SPEED": 5,
-        "ARMOR": 5
+        "ARMOR": 5,
+        "DAMAGE": 1
     },
 
     "PLAYER": {
