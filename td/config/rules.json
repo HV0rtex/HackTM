@@ -4,7 +4,8 @@
         "MAX_ALIVE_TIME": 1000,
         "MIN_DISTANCE": 100,
         "MAX_DISTANCE": 100,
-        "SPAWN_RATE": 5
+        "SPAWN_RATE": 5,
+        "MAX_SPAWNERS": 1
     },
 
     "ENEMY": {
