@@ -44,8 +44,7 @@ def build_state(data):
         coordX += obj['LAT'] // 0.0004
         coordY += obj['LNG'] // 0.0004
 
-        print(coordX, coordY)
-        next_state[100 * coordY + coordX] = obj['TYPE']
+        next_state[100 * int(coordY) + int(coordX)] = obj['TYPE']
     return next_state
 
 def learn_ai(response):
