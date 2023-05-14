@@ -1,0 +1,70 @@
+/* CSS Document */
+
+
+body {
+	width: 100vw;
+	height: 100vh;
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	background: url("../../files/img/bg.jpg") fixed no-repeat center/cover;
+}
+main {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	
+	aspect-ratio: 16 / 9;
+	
+	background-color: white;
+}
+main.fit_width {
+	width: 100vw !important;
+}
+main.fit_height {
+	height: 100vh !important;
+}
+
+
+
+main>#map {
+	position: absolute;
+	top: 0;
+	left: 0;
+	
+	z-index: 100;
+}
+main>#pannel {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 20%;
+	height: 100%;
+	background-color: #CBB279;
+	
+	z-index: 200;
+}
+main>#pannel .icon_title {
+	width: 7rem;
+	margin: 0;
+}
+main>#pannel .icon {
+	width: 2rem;
+	margin: 0 0.5rem 0 0;
+}
+main>#pannel .tower_shop {
+	flex-wrap: wrap;
+}
+main>#pannel .tower_shop>div {
+	cursor: pointer;
+}
+main>#pannel .tower_shop .icon {
+	width: 6rem;
+	margin: 0 0.5rem;
+}
+main>#pannel .tower_shop .text {
+	font-s9ze: 3rem;
+}

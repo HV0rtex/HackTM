@@ -1,0 +1,178 @@
+@charset "UTF-8";
+
+
+
+/* WEBSITE ALIGNMENT BLOCKS - USAGE:
+	section page (optional - multi-page html only)
+		section section
+			div block/block_2c/block_3c/block_4c (1-4 columns)
+				div (column 1)
+					content
+					content
+				div (column 2)
+					content
+					content
+				...
+*/
+.page {margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center;}
+.section {margin: 0;}
+.bg {background: #FFFFFF;}
+.bg_image {background: url("../.././files/images/bg.png") no-repeat; background-size: cover;}
+.width {margin: 0 8% !important; width: 84% !important;}
+.round {border-radius: 3rem;}
+.padding {padding: 4rem 0 4rem 0}
+.block {margin: 0; width: 100%;}
+.block_2c, .block_3c, .block_4c {margin: 0; width: 100%; display: flex; align-items: center;}
+.block_2c>div {width: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center;}
+.block_3c>div {width: 33.33%; display: flex; flex-direction: column; align-items: center; justify-content: center;}
+.block_4c>div {width: 25%; display: flex; flex-direction: column; align-items: center; justify-content: center;}
+.centered {display: flex; align-items: center; justify-content: center;}
+.centered_text {text-align: center !important; text-justify: none !important;}
+.column {display: flex; flex-direction: column;}
+.row {display: flex; flex-direction: row;}
+
+
+
+/* FONTS */
+.font_s1 {
+	font-family: 'Dela Gothic One', sans-serif !important;
+}
+.font_s2 {
+	font-family: 'Inter', sans-serif !important;
+}
+.font_s3 {
+	font-family: 'Sofia Sans', sans-serif !important;
+}
+
+.font_c1 {
+	font-family: 'Shantell Sans', cursive !important;
+}
+.font_c2 {
+	font-family: 'Pacifico', cursive !important;
+}
+.font_c3 {
+	font-family: 'Eagle Lake', cursive !important;
+}
+.font_c4 {
+	font-family: 'Dancing Script', cursive !important;
+}
+.font_c5 {
+	font-family: 'Modern Antiqua', cursive !important;
+}
+
+.font_m1 {
+	font-family: 'Audiowide', monospace !important;
+}
+.font_m2 {
+	font-family: 'Rajdhani', sans-serif !important;
+}
+.font_m3 {
+	font-family: 'Orbitron', monospace !important;
+}
+.font_m4 {
+	font-family: 'Quicksand', sans-serif !important;
+}
+.font_m5 {
+	font-family: 'Tenor Sans', sans-serif !important;
+}
+
+.shadow {
+	text-shadow: 0px 0px 30px black;
+}
+html {
+	--font_s1: 'Dela Gothic One', sans-serif !important;
+	--font_s2: 'Inter', sans-serif !important;
+	--font_s3: 'Sofia Sans', sans-serif !important;
+	
+	--font_c1: 'Shantell Sans', cursive !important;
+	--font_c2: 'Pacifico', cursive !important;
+	--font_c3: 'Eagle Lake', cursive !important;
+	--font_c4: 'Dancing Script', cursive !important;
+	--font_c5: 'Modern Antiqua', cursive !important;
+	
+	--font_m1: 'Audiowide', monospace !important;
+	--font_m2: 'Rajdhani', sans-serif !important;
+	--font_m3: 'Orbitron', monospace !important;
+	--font_m4: 'Quicksand', sans-serif !important;
+	--font_m5: 'Tenor Sans', sans-serif !important;
+}
+
+
+
+/* TEXT STYLE - USE IN: <p><h1><font> ETC */
+.text {
+	font-family: var(--font_c3);
+	font-weight: 400;
+	color: #EEEEEE;
+	
+	font-size: 1.2rem;
+	line-height: 1em;
+	letter-spacing: 0.2rem;
+	
+	text-align: justify;
+	text-justify: inter-word;
+	
+	padding: 0.2rem 0;
+}
+.title {
+	font-family: var(--font_c2);
+	font-weight: 900;
+	color: #537188;
+	
+	font-size: 2.5rem;
+	line-height: 1em;
+	letter-spacing: 0.2rem;
+	padding: 2.2rem 0;
+	margin: 0 !important;
+	
+	text-align: center;
+}
+.subtitle {
+	/* UN-USED */
+	font-family: var(--font_c3);
+	font-weight: 900;
+	color: #537188;
+	
+	font-size: 1.7rem;
+	line-height: 1em;
+	letter-spacing: 0.2rem;
+	
+	text-align: center;
+	
+	padding: 2rem 0 0.5rem 0;
+}
+.br {
+	font-family: 'Inter', sans-serif;
+	font-weight: 300;
+	color: #FFFFFF;
+	
+	font-size: 1.8rem;
+	line-height: 1em;
+}
+
+
+
+/* IMAGE STYLE - USE IN: <img> */
+.image {
+	width: 70%;
+	height: 70%;
+	padding: 15%;
+}
+
+
+
+/* FOOTER */
+.footer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	width: 100%;
+	margin-top: 5rem;
+	
+	background-color: #25355c;
+}
+.footer p {
+	margin: 1rem;
+	color: white;
+}

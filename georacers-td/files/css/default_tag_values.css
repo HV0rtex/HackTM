@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+
+
+/* DEFAULT TAG VALUES */
+* {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+html {
+	font-size: 10px;
+	
+	min-height: 100%;
+    position: relative;
+}
+body {
+	margin: 0;
+	overflow: hidden;
+}
+a:link, a:visited, a:link:active, a:visited:active {
+	color: #FFFFFF;
+	text-decoration: none;
+	cursor: pointer;
+}
