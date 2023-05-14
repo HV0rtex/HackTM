@@ -31,13 +31,18 @@ class Agent:
     def act(self, state):
         epsilon = 0.01
 
+        numSpawners = 0
+        for i in range(10000):
+            if state[i] == 100:
+                numSpawners += 1
+
         if np.random.rand() < epsilon:
             action = np.random.choice([i for i in range(20000)])
         else:
             q_values = self.__model.predict(np.array([state]))
             action = np.argmax(q_values)
 
-        if self.__firstMove == 0 and not self.legalize_action(state, action):
+        if numSpawners == 0 and not self.legalize_action(state, action):
             space = []
             for i in range(20000):
                 if self.legalize_action(state, i):
@@ -56,7 +61,7 @@ class Agent:
 
         if action >= 10000 and numSpawners < 1:
             return False
-        if action < 10000 and numSpawners == 2:
+        if action < 10000 and numSpawners >= 2:
             return False
 
 

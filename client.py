@@ -24,7 +24,6 @@ def build_request(action):
     return response.read()
 
 def build_state(data):
-    reward = data['CLOSEST_DEATH']
     next_state = np.zeros(shape=(10000,))
 
     for obj in data['OBJECTS']:
@@ -48,23 +47,27 @@ def build_state(data):
     return next_state
 
 def learn_ai(response):
+    global prev_state, state
     string = response.decode('utf-8')
-    data = json.loads(string)
 
-    state = build_state(data)
+    try:
+        data = json.loads(string)
 
-    agent.learn(prev_state, prev_action, -1 * data["CLOSEST_DEATH"], state, 0)
+        prev_state = state
+        state = build_state(data)
+
+        agent.learn(prev_state, prev_action, -1 * data["CLOSEST_DEATH"], state, 0)
+    except json.JSONDecodeError:
+        pass
 
 def make_move():
+    global prev_action
     action = agent.act(state)
     response = build_request(action)
 
-    print(response)
-
     if len(response) > 0:
         learn_ai(response)
-        prev_action = action
-        prev_state = state
+    prev_action = action
 
 if __name__ == '__main__':
     while True:
