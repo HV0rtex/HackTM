@@ -2,15 +2,15 @@ import numpy as np
 from tensorflow import keras
 from json import dumps
 
-# -0.05  --- +0.05
-# 1 bucata = 0.001
+# -0.02  --- +0.02
+# 1 bucata = 0.0004
 # 100 * 100
 
 # map of 10.000
 #   - Turn : cod = tip_turn
 #   - Spawn : cod = 100
 #
-#
+# Safe-zone: -0.008 --- 0.008
 
 class Agent:
     def __init__(self) -> None:
@@ -26,6 +26,7 @@ class Agent:
 
         self.__learning_rate = 0.001
         self.__discount_factor = 0.99
+        self.__firstMove = 0
 
     def act(self, state):
         epsilon = 0.01
@@ -36,21 +37,15 @@ class Agent:
             q_values = self.__model.predict(np.array([state]))
             action = np.argmax(q_values)
 
-        #
-        # Perform a new action that is legal
-        #
-        if not self.legalize_action(state, action):
-            self.learn(state, action, -1000, state, 1)
-            choices = [i for i in range(20000)]
-            tbr = []
+        if self.__firstMove == 0 and not self.legalize_action(state, action):
+            space = []
+            for i in range(20000):
+                if self.legalize_action(state, i):
+                    space.append(i)
 
-            for choice in choices:
-                if not self.legalize_action(state, choice):
-                    tbr.append(choice)
-            for choice in tbr:
-                choices.remove(choice)
-            
-            action = np.random.choice(choices)
+            action = np.random.choice(space)
+            self.__firstMove = 1
+
         return action
     
     def legalize_action(self, state, action):
@@ -98,51 +93,36 @@ class Agent:
         q_values[0, action] += self.__learning_rate * td_error
         self.__model.fit(np.array([state]), q_values, verbose=0)
 
-def perform_action(action):
+def perform_action(action, isLeagal):
     action_json = {
         "TYPE": 0,
-        "X_DISTANCE": 0,
-        "Y_DISTANCE": 0
+        "LAT": 0,
+        "LNG": 0
     }
 
     print(action)
 
     if action > 10000:
-        action_json["TYPE"] = 1
+        action_json["TYPE"] = -1
         action -= 10000
-    
-    if action // 100 > 50:
-        action_json["X_DISTANCE"] = int(action // 100 - 50) * 0.01
     else:
-        action_json["X_DISTANCE"] = int(action // 100) * -0.01
+        action_json["TYPE"] = 1
+
+    if not isLeagal:
+        action_json["TYPE"] = 0
+        action_json["LAT"] = 0
+        action_json["LNG"] = 0
+
+        return dumps(action_json)
+
+    if action // 100 > 50:
+        action_json["LNG"] = int(action // 100 - 50) * 0.0004
+    else:
+        action_json["LNG"] = int(action // 100) * -0.0004
     
     if action % 100 > 50:
-        action_json["Y_DISTANCE"] = int(action % 100 - 50) * 0.01
+        action_json["LAT"] = int(action % 100 - 50) * 0.0004
     else:
-        action_json["Y_DISTANCE"] = int(action % 100) * -0.01
+        action_json["LAT"] = int(action % 100) * -0.0004
 
     return dumps(action_json)
-
-if __name__ == '__main__':
-    state = np.zeros(shape=(10000,))
-
-    model = Agent()
-    
-    act = model.act(state)
-    print("Chosen action: ", perform_action(act))
-
-    model.learn(state, act, 50, model.getNextState(state, act), 0)
-    state = model.getNextState(state, act)
-
-    act = model.act(state)
-    print("Chosen action: ", perform_action(act))
-
-    model.learn(state, act, 50, model.getNextState(state, act), 0)
-    state = model.getNextState(state, act)
-
-    # Here AI should be forced to remove a spawn
-    act = model.act(state)
-    print("Chosen action: ", perform_action(act))
-
-    model.learn(state, act, 50, model.getNextState(state, act), 0)
-    state = model.getNextState(state, act)
